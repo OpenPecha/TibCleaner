@@ -1,4 +1,4 @@
-from tibecleaner.example import add_one
+from tibcleaner.example import add_one
 
 
 def test_add_one():
