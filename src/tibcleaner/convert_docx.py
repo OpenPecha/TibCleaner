@@ -3,7 +3,7 @@ from pathlib import Path
 
 from docx import Document
 
-from tibcleaner.config import load_docx_checkpoints, save_docx_checkpoint
+from tibcleaner.config import ROOT_DIR, load_docx_checkpoints, save_docx_checkpoint
 from tibcleaner.filter import get_all_docx_files
 
 log_fn = "docx_to_txt_errors.log"
@@ -34,7 +34,7 @@ def convert_docx_to_txt(docx_file_path: Path, destination_dir: Path):
             for para in doc.paragraphs:
                 txt_file.write(para.text + "\n")
     except Exception as e:
-        raise RuntimeError(
+        raise Exception(
             f"Error occurred while converting file {docx_file_path.name}: {e}"
         )
 
@@ -58,7 +58,6 @@ def convert_docx_files_pipeline(folder_dir: Path, destination_dir: Path):
 
 if __name__ == "__main__":
 
-    docx_path = Path("data/Doc1.docx")
-    output_directory = Path("data")
-    txt_path = convert_docx_to_txt(docx_path, output_directory)
-    print(f"Converted TXT file saved to: {txt_path}")
+    docx_path = ROOT_DIR / "downloads"
+    output_directory = docx_path
+    convert_docx_files_pipeline(docx_path, output_directory)
