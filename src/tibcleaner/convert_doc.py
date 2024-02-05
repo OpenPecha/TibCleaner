@@ -1,7 +1,8 @@
 import subprocess
 from pathlib import Path
 
-from tibcleaner.config import DATA_DIR
+from tibcleaner.config import DATA_DIR, load_doc_checkpoints, save_doc_checkpoint
+from tibcleaner.filter import get_all_doc_files
 
 
 def get_libreoffice_path():
@@ -37,6 +38,14 @@ def convert_doc_to_docx(doc_file_path: Path, destination_dir: Path):
         )
 
 
+def covert_doc_files_pipeline(folder_dir: Path, destination_dir: Path):
+    files = get_all_doc_files(folder_dir)
+    doc_checkpoints = load_doc_checkpoints()
+    for file in files:
+        if file not in doc_checkpoints:
+            convert_doc_to_docx(file, destination_dir)
+            save_doc_checkpoint(file)
+
+
 if __name__ == "__main__":
-    doc_path = DATA_DIR / "《རྦ་བཞེད་》ཕྱོགས་བསྒྲིགས།.doc"
-    convert_doc_to_docx(doc_path, destination_dir=DATA_DIR)
+    covert_doc_files_pipeline(DATA_DIR, destination_dir=DATA_DIR)
