@@ -7,18 +7,19 @@
 
 <!-- Replace with 1-sentence description about what this tool is or does.-->
 
-<h3 align="center">Use this repo template for all new Python projects.</h3>
+<h3 align="center">TibCleaner</h3>
 
 ## Description
 
-Project description goes here.
+Creating a clean and consistent Tibetan Monolingual Corpus.
 
 ## Project owner(s)
 
 <!-- Link to the repo owners' github profiles -->
 
-- [@10zinten](https://github.com/10zinten)
-- [@evanyerburgh](https://github.com/evanyerburgh)
+- [@TenzinGayche](https://github.com/TenzinGayche)
+- [@10tenzin3](https://github.com/tenzin3)
+
 
 ## Integrations
 
