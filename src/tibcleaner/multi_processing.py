@@ -18,7 +18,7 @@ def worker_task(args):
     file_extn_to_txt(file, output_dir)
 
 
-def convert_rtf_files_to_txt(all_files: List[Path], output_dir: Path):
+def convert_files_to_txt(all_files: List[Path], output_dir: Path):
     checkpoints = load_checkpoints()
     tasks = [(file, output_dir, checkpoints) for file in all_files]
 
@@ -38,4 +38,4 @@ if __name__ == "__main__":
     dir_name = "A"
     all_files = list(folder_dir.rglob("*.file_type"))
     output_dir = Path("output/A")
-    convert_rtf_files_to_txt(all_files, output_dir)
+    convert_files_to_txt(all_files, output_dir)
