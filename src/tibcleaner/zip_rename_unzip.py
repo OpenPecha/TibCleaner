@@ -58,3 +58,11 @@ def extract_zip_files(zip_file_paths: List[Path], destination_dir: Path, dir_nam
         writer = csv.writer(csvfile)
         writer.writerow(["Old File Name", "New File Name"])
         writer.writerows(mapping)
+
+
+if __name__ == "__main__":
+    data_dir = Path("/root/A")
+    destination_dir = Path("/root/A_ZIP")
+    zip_files = list(data_dir.rglob("*.zip"))
+    extract_zip_files(zip_files, destination_dir, "A")
+    print("Extraction complete")
