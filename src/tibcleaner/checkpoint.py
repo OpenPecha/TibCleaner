@@ -26,4 +26,4 @@ def load_checkpoints():
 
 def save_checkpoint(file_checkpoint: Path):
     with open(CONVERT_CHECKPOINT, "a") as f:
-        f.write(f"{file_checkpoint}\n")
+        f.write(f"{str(file_checkpoint)}\n")
