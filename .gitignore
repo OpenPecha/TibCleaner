@@ -5,7 +5,8 @@ __pycache__/
 notebooks/
 # C extensions
 *.so
-
+checkpoint.txt
+corrupted_file.txt
 # Distribution / packaging
 .Python
 build/

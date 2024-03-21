@@ -38,7 +38,7 @@ def epub_to_txt(epub_path: Path, output_dir: Path) -> None:
                 full_text += "\n\n" + text
 
         # Write the extracted text to a new TXT file
-        output_txt_path = output_dir / (epub_path.name + ".txt")
+        output_txt_path = output_dir / (epub_path.stem + ".txt")
         with open(output_txt_path, "w", encoding="utf-8") as txt_file:
             txt_file.write(full_text)
 

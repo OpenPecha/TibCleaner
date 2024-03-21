@@ -86,15 +86,11 @@ def process_pdf(args):
             return
         extracted_text = read_pdf_file(pdf_file)
         if extracted_text is None:
-            save_checkpoint(pdf_file)  # Adjusted to ensure correct format
             print(f"[ERROR]: {str(pdf_file)} is corrupted file.")
             save_corrupted_files(pdf_file, "Corrupted file")
             return
         if contains_tibetan_text(extracted_text):
             pdf_to_txt_file(pdf_file, output_dir_txt, extracted_text)
-            save_checkpoint(pdf_file)  # Adjusted to ensure correct format
-            return
-        if extracted_text:
             save_checkpoint(pdf_file)  # Adjusted to ensure correct format
             return
         images_path = output_dir_jpeg / f"{pdf_file.stem}_images"

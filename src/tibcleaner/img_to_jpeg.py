@@ -19,7 +19,20 @@ def _mkdir(path):
 
 
 def convert_image_format_to_jpeg(image_path: Path, destination_dir: Path):
-    known_formats = ["png", "PCX", "jpg", "JPG", "gif", "tif", "TIF", "svg"]
+    known_formats = [
+        "png",
+        "PCX",
+        "jpg",
+        "JPG",
+        "gif",
+        "tif",
+        "TIF",
+        "svg",
+        "bmp",
+        "BMP",
+        "jpeg",
+        "JPEG",
+    ]
     file_type = image_path.suffix[1:]
     if file_type in known_formats:
         try:

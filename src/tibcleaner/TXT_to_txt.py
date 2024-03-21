@@ -20,7 +20,7 @@ def read_TXT_file(txt_file_path: Path) -> str:
 def convert_TXT_to_txt(file_path: Path, output_dir: Path):
     text = ""
     try:
-
+        output_dir = _mkdir(output_dir)
         text = read_TXT_file(file_path)
 
         output_file = output_dir / f"{file_path.stem}.txt"
