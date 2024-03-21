@@ -29,7 +29,6 @@ dependencies = [
   "rarfile>=4.1",
   "striprtf>=0.0.26",
   "tqdm>=4.66.2",
-  "doc2docx>=0.2.4",
 ]
 
 [project.optional-dependencies]
