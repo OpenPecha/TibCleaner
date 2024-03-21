@@ -29,6 +29,8 @@ dependencies = [
   "rarfile>=4.1",
   "striprtf>=0.0.26",
   "tqdm>=4.66.2",
+  "botok>=0.8.12",
+  "chardet>=5.2.0"
 ]
 
 [project.optional-dependencies]

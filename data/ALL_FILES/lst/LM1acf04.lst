@@ -1,0 +1,73 @@
+%!Adobe-FontList 1.15
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MinionPro-Regular
+FamilyName:Minion Pro
+StyleName:Regular
+FullName:Minion Pro
+MenuName:Minion Pro
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\12-Dec_15\Sakya_Thar Lam Monastery\Tharlam Book 4 Folder\Document fonts\MinionPro-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:217280
+FileModTime:1429597306
+WeightClass:400
+WidthClass:5
+AngleClass:0
+DesignSize:110
+NameArray:0,Mac,4,Minion Pro
+NameArray:0,Win,1,Minion Pro
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:MonlamUniOuChan2
+FamilyName:Monlam Uni OuChan2
+StyleName:Regular
+FullName:Monlam Uni OuChan2
+MenuName:Monlam Uni OuChan2
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\12-Dec_15\Sakya_Thar Lam Monastery\Tharlam Book 4 Folder\Document fonts\Monlam Uni OuChan2.ttf
+DataFormat:sfntData
+FileLength:1529892
+FileModTime:1287743116
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,18,Monlam Uni OuChan2
+NameArray:0,Mac,4,Monlam Uni OuChan2
+NameArray:0,Win,1,Monlam Uni OuChan2
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:MonlamUniOuChan5
+FamilyName:Monlam Uni OuChan5
+StyleName:Regular
+FullName:Monlam Uni OuChan5
+MenuName:Monlam Uni OuChan5
+StyleBits:0
+FamilyNameNative:
+StyleNameNative:Regular
+FullNameNative:
+WritingScript:Thai
+OutlineFileName:D:\12-Dec_15\Sakya_Thar Lam Monastery\Tharlam Book 4 Folder\Document fonts\Monlam Uni OuChan5.ttf
+DataFormat:sfntData
+FileLength:1776908
+FileModTime:1286341574
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,18,Monlam Uni OuChan5
+NameArray:0,Mac,4,Monlam Uni OuChan5
+NameArray:0,Win,1,Monlam Uni OuChan5
+%EndFont

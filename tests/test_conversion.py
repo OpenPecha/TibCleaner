@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from typing import List
 
@@ -8,6 +9,7 @@ from tibcleaner.html_to_txt import html_to_txt_file
 from tibcleaner.img_to_jpeg import convert_image_format_to_jpeg
 from tibcleaner.pdf_to_txt_and_jpeg import process_pdf
 from tibcleaner.rtf_to_txt import rtf_file_to_txt
+from tibcleaner.text_files_tokenizer import all_file_text_tokenize
 from tibcleaner.TXT_to_txt import convert_TXT_to_txt
 from tibcleaner.zip_rename_unzip import extract_zip_files as zip_renanme_extract
 from tibcleaner.zip_to_unzip import extract_rar_files, extract_zip_files
@@ -125,3 +127,15 @@ def test_zip_rename_extract():
     zip_renanme_extract(zip_files, output_dir, "A")
     assert (output_dir).exists()
     assert (output_dir / "A_filename_mapping.csv").exists()
+
+
+def test_text_files_tokenizer():
+    folder_dir = Path("tests/test_data/ALL_FILES/")
+    output_dir = Path("tests/test_data/tokenized_text")
+    os.makedirs(output_dir, exist_ok=True)
+    txt_files = list(folder_dir.rglob("*.txt"))
+    checkpoints = load_checkpoints()
+    all_file_text_tokenize(txt_files, output_dir)
+    for txt_file in txt_files:
+        if f"{str(txt_file)}" in checkpoints:
+            assert (output_dir / f"{txt_file.stem}.txt").exists()
