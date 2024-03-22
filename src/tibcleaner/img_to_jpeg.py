@@ -9,13 +9,7 @@ from tibcleaner.checkpoint import (
     save_checkpoint,
     save_corrupted_files,
 )
-
-
-def _mkdir(path):
-    if path.is_dir():
-        return path
-    path.mkdir(exist_ok=True, parents=True)
-    return path
+from tibcleaner.utils import _mkdir
 
 
 def convert_image_format_to_jpeg(image_path: Path, destination_dir: Path):

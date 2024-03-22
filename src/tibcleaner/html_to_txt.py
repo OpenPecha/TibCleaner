@@ -9,22 +9,16 @@ from tibcleaner.checkpoint import (
     save_checkpoint,
     save_corrupted_files,
 )
+from tibcleaner.utils import _mkdir
 
 """function to convert html to txt file"""
-
-
-def _mkdir(path):
-    if path.is_dir():
-        return path
-    path.mkdir(exist_ok=True, parents=True)
-    return path
 
 
 def html_to_txt_file(file_path: Path, output_dir: Path):
     _mkdir(output_dir)
     output_file = output_dir / f"{file_path.stem}.txt"
     text = ""
-    if file_path.suffix in [".html", ".htm"]:
+    if file_path.suffix.lower() in [".html", ".htm"]:
         text = read_html_file(file_path)
         if text:
             with open(output_file, "w", encoding="utf-8") as file:
@@ -50,7 +44,6 @@ if __name__ == "__main__":
     output_dir = Path("/root/html_to_txt/A/")
     html_files = list(Path("/root/A/").rglob("*.html"))
     html_files.extend(list(Path("/root/A/").rglob("*.htm")))
-    _mkdir(output_dir)
     checkpoints = load_checkpoints()
     for html_file in tqdm(html_files, desc="Converting HTML to txt"):
         if str(html_file) in checkpoints:

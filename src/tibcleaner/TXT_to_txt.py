@@ -8,9 +8,10 @@ from tibcleaner.checkpoint import (
     save_checkpoint,
     save_corrupted_files,
 )
+from tibcleaner.utils import _mkdir
 
 
-def read_TXT_file(txt_file_path: Path) -> str:
+def read_txt_file(txt_file_path: Path) -> str:
     """Reads the content of a TXT file"""
     with open(txt_file_path, encoding="utf-8") as txt_file:
         text = txt_file.read()
@@ -21,7 +22,7 @@ def convert_TXT_to_txt(file_path: Path, output_dir: Path):
     text = ""
     try:
         output_dir = _mkdir(output_dir)
-        text = read_TXT_file(file_path)
+        text = read_txt_file(file_path)
 
         output_file = output_dir / f"{file_path.stem}.txt"
         with open(output_file, "w", encoding="utf-8") as file:
@@ -31,13 +32,6 @@ def convert_TXT_to_txt(file_path: Path, output_dir: Path):
     except Exception as e:
         save_corrupted_files(file_path, str(e))
         return None
-
-
-def _mkdir(path):
-    if path.is_dir():
-        return path
-    path.mkdir(exist_ok=True, parents=True)
-    return path
 
 
 if __name__ == "__main__":

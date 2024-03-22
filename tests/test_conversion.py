@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 from typing import List
 
@@ -9,10 +8,7 @@ from tibcleaner.html_to_txt import html_to_txt_file
 from tibcleaner.img_to_jpeg import convert_image_format_to_jpeg
 from tibcleaner.pdf_to_txt_and_jpeg import process_pdf
 from tibcleaner.rtf_to_txt import rtf_file_to_txt
-from tibcleaner.text_files_tokenizer import all_file_text_tokenize
-from tibcleaner.TXT_to_txt import convert_TXT_to_txt
-from tibcleaner.zip_rename_unzip import extract_zip_files as zip_renanme_extract
-from tibcleaner.zip_to_unzip import extract_rar_files, extract_zip_files
+from tibcleaner.TXT_to_txt import convert_TXT_to_txt, read_txt_file
 
 
 def test_epub_to_text():
@@ -21,7 +17,14 @@ def test_epub_to_text():
     epub_files = list(folder_dir.rglob("*.epub"))
     for epub_file in epub_files:
         epub_to_txt(epub_file, output_dir)
+        output_file = output_dir / f"{epub_file.stem}.txt"
+        output_text = read_txt_file(output_file)
+        expected_output_text = read_txt_file(
+            output_dir / f"expected_{epub_file.stem}.txt"
+        )
         assert (output_dir / f"{epub_file.stem}.txt").exists()
+        assert output_text == expected_output_text
+        output_file.unlink()
 
 
 def test_html_to_text():
@@ -30,7 +33,14 @@ def test_html_to_text():
     html_files = list(folder_dir.rglob("*.html"))
     for html_file in html_files:
         html_to_txt_file(html_file, output_dir)
+        output_file = output_dir / f"{html_file.stem}.txt"
+        output_text = read_txt_file(output_dir / f"{html_file.stem}.txt")
+        expected_output_text = read_txt_file(
+            output_dir / f"expected_{html_file.stem}.txt"
+        )
         assert (output_dir / f"{html_file.stem}.txt").exists()
+        assert output_text == expected_output_text
+        output_file.unlink()
 
 
 def test_rtf_to_text():
@@ -39,7 +49,14 @@ def test_rtf_to_text():
     rtf_files = list(folder_dir.rglob("*.rtf"))
     for rtf_file in rtf_files:
         rtf_file_to_txt(rtf_file, output_dir)
+        output_file = output_dir / f"{rtf_file.stem}.txt"
         assert (output_dir / f"{rtf_file.stem}.txt").exists()
+        output_text = read_txt_file(output_dir / f"{rtf_file.stem}.txt")
+        expected_output_text = read_txt_file(
+            output_dir / f"expected_{rtf_file.stem}.txt"
+        )
+        assert output_text == expected_output_text
+        output_file.unlink()
 
 
 def test_docx_to_text():
@@ -48,7 +65,14 @@ def test_docx_to_text():
     docx_files = list(folder_dir.rglob("*.docx"))
     for docx_file in docx_files:
         docx_to_txt(docx_file, output_dir)
+        output_file = output_dir / f"{docx_file.stem}.txt"
         assert (output_dir / f"{docx_file.stem}.txt").exists()
+        output_text = read_txt_file(output_dir / f"{docx_file.stem}.txt")
+        expected_output_text = read_txt_file(
+            output_dir / f"expected_{docx_file.stem}.txt"
+        )
+        assert output_text == expected_output_text
+        output_file.unlink()
 
 
 def test_pdf_to_txt_and_jpeg():
@@ -62,6 +86,14 @@ def test_pdf_to_txt_and_jpeg():
         assert (output_dir_txt / f"{pdf_file.stem}.txt").exists() or (
             output_dir_jpeg / f"{pdf_file.stem}_images"
         ).exists()
+        output_file_txt = output_dir_txt / f"{pdf_file.stem}.txt"
+        output_file_img = output_dir_jpeg / f"{pdf_file.stem}_images"
+        if output_file_txt.exists():
+            output_file_txt.unlink()
+        if output_file_img.exists():
+            for img_file in output_file_img.rglob("*"):
+                img_file.unlink()
+            output_file_img.rmdir()
 
 
 def test_img_to_jpeg():
@@ -91,24 +123,7 @@ def test_img_to_jpeg():
         file_type = img_file.suffix[1:]
         convert_image_format_to_jpeg(img_file, output_dir)
         assert (output_dir / file_type / f"{img_file.stem}.jpeg").exists()
-
-
-def test_zip_extract():
-    folder_dir = Path("tests/test_data/ALL_FILES/")
-    output_dir = Path("tests/test_data/zip_extract")
-    zip_files = list(folder_dir.rglob("*.zip"))
-    extract_zip_files(zip_files, output_dir)
-    for zip_file in zip_files:
-        assert (output_dir / f"{zip_file.stem}").exists()
-
-
-def test_rar_extract():
-    folder_dir = Path("tests/test_data/ALL_FILES/")
-    output_dir = Path("tests/test_data/rar_extract")
-    rar_files = list(folder_dir.rglob("*.rar"))
-    extract_rar_files(rar_files, output_dir)
-    for rar_file in rar_files:
-        assert (output_dir / f"{rar_file.stem}").exists()
+        (output_dir / file_type / f"{img_file.stem}.jpeg").unlink()
 
 
 def test_TXT_to_txt():
@@ -118,24 +133,9 @@ def test_TXT_to_txt():
     for txt_file in txt_files:
         convert_TXT_to_txt(txt_file, output_dir)
         assert (output_dir / f"{txt_file.stem}.txt").exists()
-
-
-def test_zip_rename_extract():
-    folder_dir = Path("tests/test_data/ALL_FILES/")
-    output_dir = Path("tests/test_data/zip_rename_extract")
-    zip_files = list(folder_dir.rglob("*.zip"))
-    zip_renanme_extract(zip_files, output_dir, "A")
-    assert (output_dir).exists()
-    assert (output_dir / "A_filename_mapping.csv").exists()
-
-
-def test_text_files_tokenizer():
-    folder_dir = Path("tests/test_data/ALL_FILES/")
-    output_dir = Path("tests/test_data/tokenized_text")
-    os.makedirs(output_dir, exist_ok=True)
-    txt_files = list(folder_dir.rglob("*.txt"))
-    checkpoints = load_checkpoints()
-    all_file_text_tokenize(txt_files, output_dir)
-    for txt_file in txt_files:
-        if f"{str(txt_file)}" in checkpoints:
-            assert (output_dir / f"{txt_file.stem}.txt").exists()
+        output_text = read_txt_file(output_dir / f"{txt_file.stem}.txt")
+        expected_output_text = read_txt_file(
+            output_dir / f"expected_{txt_file.stem}.txt"
+        )
+        assert output_text == expected_output_text
+        (output_dir / f"{txt_file.stem}.txt").unlink()

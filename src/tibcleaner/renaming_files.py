@@ -3,8 +3,10 @@ from pathlib import Path
 from typing import List
 
 
-def get_all_files(folder_dir: Path, dir_name: str) -> List[Path]:
-    file_formats = ["file_extension1", "file_extension2"]
+def get_all_files(
+    folder_dir: Path, dir_name: str, file_formats: List[str]
+) -> List[Path]:
+    file_formats = file_formats
     files: List[Path] = []  # Type annotation added here
 
     for file_format in file_formats:
@@ -38,4 +40,5 @@ def rename_files(
 if __name__ == "__main__":
     folder_dir = Path("root/A")
     dir_name = "A"
-    get_all_files(folder_dir, dir_name)
+    file_formats = ["file_ext_1", "file_ext_2"]
+    get_all_files(folder_dir, dir_name, file_formats)

@@ -14,13 +14,7 @@ from tibcleaner.checkpoint import (
     save_checkpoint,
     save_corrupted_files,
 )
-
-
-def _mkdir(path):
-    if path.is_dir():
-        return path
-    path.mkdir(exist_ok=True, parents=True)
-    return path
+from tibcleaner.utils import _mkdir
 
 
 def pdf_to_txt_file(file_path: Path, output_dir: Path, extracted_text: str):

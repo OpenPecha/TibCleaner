@@ -9,13 +9,7 @@ from tibcleaner.checkpoint import (
     save_checkpoint,
     save_corrupted_files,
 )
-
-
-def _mkdir(path: Path):
-    """Ensure the directory exists."""
-    if not path.is_dir():
-        path.mkdir(parents=True, exist_ok=True)
-    return path
+from tibcleaner.utils import _mkdir
 
 
 def docx_to_txt(file_path: Path, output_dir: Path):

@@ -5,6 +5,13 @@ from typing import List
 from tqdm import tqdm
 
 
+def _mkdir(path: Path):
+    """Ensure the directory exists."""
+    if not path.is_dir():
+        path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
 def copy_documents(source_paths: List[Path], destination_dir: Path):
     # Ensure the destination directory exists
     destination_dir.mkdir(parents=True, exist_ok=True)
