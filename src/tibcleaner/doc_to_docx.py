@@ -5,34 +5,15 @@ from pathlib import Path
 from doc2docx import convert
 from tqdm import tqdm
 
-checkpoint_file = "checkpoint.txt"
-error_file = "errors.txt"
-
-if not Path(checkpoint_file).exists():
-    Path(checkpoint_file).touch()
-
-
-def load_checkpoint():
-    try:
-        with open(checkpoint_file) as file:
-            return file.read().splitlines()
-    except FileNotFoundError:
-        return []
+from tibcleaner.checkpoint import (
+    load_checkpoints,
+    save_checkpoint,
+    save_corrupted_files,
+)
 
 
-def add_checkpoint(file_name: str):
-    with open(checkpoint_file, "a") as file:
-        file.write(file_name + "\n")
-
-
-def add_error(file_name: str, error: str):
-    with open(error_file, "a") as file:
-        file.write(f"{file_name}: {error}\n")
-
-
-# Function to be executed by each worker in the pool
-def convert_file(file_path: str):
-    checkpoints = load_checkpoint()
+def doc_to_docx(file_path: str):
+    checkpoints = load_checkpoints()
     if file_path in checkpoints:
         print(f"Skipping {file_path} as it has already been converted")
         return
@@ -41,9 +22,9 @@ def convert_file(file_path: str):
         convert(file_path, f"docx_output/{Path(file_path).stem}.docx")
         end = time.time()
         print(f"Converted {file_path} in {end - start:.2f} seconds")
-        add_checkpoint(str(file_path))
+        save_checkpoint(Path(file_path))
     except Exception as e:
-        add_error(str(file_path), str(e))
+        save_corrupted_files(Path(file_path), str(e))
         print(f"Error converting {file_path}: {e}")
 
 
@@ -56,7 +37,7 @@ def main():
     ]
 
     for doc_file in tqdm(doc_files, desc="converting doc to docx"):
-        convert_file(doc_file)
+        doc_to_docx(doc_file)
 
 
 if __name__ == "__main__":

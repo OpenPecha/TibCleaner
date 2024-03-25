@@ -17,7 +17,7 @@ from tibcleaner.checkpoint import (
 from tibcleaner.utils import _mkdir
 
 
-def pdf_to_txt_file(file_path: Path, output_dir: Path, extracted_text: str):
+def pdf_to_txt(file_path: Path, output_dir: Path, extracted_text: str):
     """Converts pdf file to a txt file"""
     _mkdir(output_dir)
     output_file = output_dir / f"{file_path.stem}.txt"
@@ -84,7 +84,7 @@ def process_pdf(args):
             save_corrupted_files(pdf_file, "Corrupted file")
             return
         if contains_tibetan_text(extracted_text):
-            pdf_to_txt_file(pdf_file, output_dir_txt, extracted_text)
+            pdf_to_txt(pdf_file, output_dir_txt, extracted_text)
             save_checkpoint(pdf_file)  # Adjusted to ensure correct format
             return
         images_path = output_dir_jpeg / f"{pdf_file.stem}_images"
@@ -96,7 +96,7 @@ def process_pdf(args):
         save_corrupted_files(pdf_file, str(e))
 
 
-def convert_all_pdfs_to_txt_and_images(
+def pdfs_to_txt_and_images(
     pdf_files: List[Path], output_dir_txt: Path, output_dir_jpeg: Path
 ):
     checkpoints = load_checkpoints()
@@ -123,4 +123,4 @@ if __name__ == "__main__":
     pdf_files = list(Path("data/pdf").rglob("*.pdf"))
     output_dir_txt = Path("data/txt")
     output_dir_jpeg = Path("data/jpeg")
-    convert_all_pdfs_to_txt_and_images(pdf_files, output_dir_txt, output_dir_jpeg)
+    pdfs_to_txt_and_images(pdf_files, output_dir_txt, output_dir_jpeg)

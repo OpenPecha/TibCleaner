@@ -14,7 +14,7 @@ from tibcleaner.utils import _mkdir
 """function to convert html to txt file"""
 
 
-def html_to_txt_file(file_path: Path, output_dir: Path):
+def html_to_txt(file_path: Path, output_dir: Path):
     _mkdir(output_dir)
     output_file = output_dir / f"{file_path.stem}.txt"
     text = ""
@@ -48,4 +48,4 @@ if __name__ == "__main__":
     for html_file in tqdm(html_files, desc="Converting HTML to txt"):
         if str(html_file) in checkpoints:
             continue
-        html_to_txt_file(html_file, output_dir)
+        html_to_txt(html_file, output_dir)

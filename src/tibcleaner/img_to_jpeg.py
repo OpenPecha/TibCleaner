@@ -12,7 +12,7 @@ from tibcleaner.checkpoint import (
 from tibcleaner.utils import _mkdir
 
 
-def convert_image_format_to_jpeg(image_path: Path, destination_dir: Path):
+def image_to_jpeg(image_path: Path, destination_dir: Path):
     known_formats = [
         "png",
         "PCX",
@@ -59,4 +59,4 @@ if __name__ == "__main__":
     for file in tqdm(files, desc="Converting to jpeg"):
         if str(file) in checkpoints:
             continue
-        convert_image_format_to_jpeg(file, output_dir)
+        image_to_jpeg(file, output_dir)

@@ -12,7 +12,7 @@ from tibcleaner.checkpoint import (
 from tibcleaner.utils import _mkdir
 
 
-def rtf_file_to_txt(file_path: Path, output_dir: Path):
+def rtf_to_txt(file_path: Path, output_dir: Path):
     """Converts a text based file to a txt file"""
     _mkdir(output_dir)
     output_file = output_dir / f"{file_path.stem}.txt"
@@ -47,4 +47,4 @@ if __name__ == "__main__":
     for file in tqdm(files, desc="Converting to txt"):
         if str(file) in checkpoints:
             continue
-        rtf_file_to_txt(file, output_dir)
+        rtf_to_txt(file, output_dir)

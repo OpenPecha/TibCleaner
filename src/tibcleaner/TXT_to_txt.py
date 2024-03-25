@@ -18,7 +18,7 @@ def read_txt_file(txt_file_path: Path) -> str:
         return text
 
 
-def convert_TXT_to_txt(file_path: Path, output_dir: Path):
+def TXT_to_txt(file_path: Path, output_dir: Path):
     text = ""
     try:
         output_dir = _mkdir(output_dir)
@@ -42,5 +42,5 @@ if __name__ == "__main__":
     for TXT_file in tqdm(all_TXT_files, desc="Converting TXT to txt"):
         if str(TXT_file) in checkpoints:
             continue
-        convert_TXT_to_txt(TXT_file, output_dir)
+        TXT_to_txt(TXT_file, output_dir)
     print("Finished converting all TXT files to txt")
