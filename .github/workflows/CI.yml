@@ -22,11 +22,6 @@ jobs:
       with:
         python-version: "3.8"
 
-    - name: Update system and install LibreOffice
-      run: |
-        sudo apt update
-        sudo apt install -y libreoffice
-
     - name: Install dependencies
       run: |
         pip install -U pip
@@ -37,4 +32,4 @@ jobs:
       run: PYTHONPATH=src pytest
 
     - name: Test Coverage
-      run: PYTHONPATH=src pytest --cov project_name
+      run: PYTHONPATH=src pytest --cov tibcleaner
