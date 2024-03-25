@@ -15,11 +15,3 @@ def test_pdf_to_txt_and_jpeg():
         assert (output_dir_txt / f"{pdf_file.stem}.txt").exists() or (
             output_dir_jpeg / f"{pdf_file.stem}_images"
         ).exists()
-        output_file_txt = output_dir_txt / f"{pdf_file.stem}.txt"
-        output_file_img = output_dir_jpeg / f"{pdf_file.stem}_images"
-        if output_file_txt.exists():
-            output_file_txt.unlink()
-        if output_file_img.exists():
-            for img_file in output_file_img.rglob("*"):
-                img_file.unlink()
-            output_file_img.rmdir()
