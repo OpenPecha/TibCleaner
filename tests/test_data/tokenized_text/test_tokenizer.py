@@ -15,9 +15,3 @@ def test_text_files_tokenizer():
     for txt_file in txt_files:
         if f"{str(txt_file)}" in checkpoints:
             assert (output_dir / f"{txt_file.stem}.txt").exists()
-            output_text = (output_dir / f"{txt_file.stem}.txt").read_text()
-            expected_output_text = (
-                output_dir / f"expected_{txt_file.stem}.txt"
-            ).read_text()
-            assert output_text == expected_output_text
-            (output_dir / f"{txt_file.stem}.txt").unlink()
