@@ -2,10 +2,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+notebooks/
 # C extensions
 *.so
-
+checkpoint.txt
+corrupted_file.txt
 # Distribution / packaging
 .Python
 build/
